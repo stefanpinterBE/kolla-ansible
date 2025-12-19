@@ -142,3 +142,16 @@
         - "{{ node_custom_config }}/cinder/{{ inventory_hostname }}/nfs_shares"
       skip: "{{ not enable_cinder_backend_nfs | bool }}"
   when: service | service_enabled_and_mapped_to_host
+
+- name: Copying over dellfcopy.deb for cinder_volume
+  vars:
+    service: "{{ cinder_services['cinder-volume'] }}"
+  become: true
+  template:
+    src: "{{ item }}"
+    dest: "{{ node_config_directory }}/cinder-volume/dellfcopy.deb"
+    mode: "0660"
+  with_first_found:
+    - files:
+        - "{{ node_custom_config }}/cinder/dellfcopy.deb"
+  when: service | service_enabled_and_mapped_to_host
