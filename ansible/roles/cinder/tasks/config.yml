@@ -147,7 +147,7 @@
   vars:
     service: "{{ cinder_services['cinder-volume'] }}"
   become: true
-  template:
+  copy:
     src: "{{ item }}"
     dest: "{{ node_config_directory }}/cinder-volume/dellfcopy.deb"
     mode: "0660"
