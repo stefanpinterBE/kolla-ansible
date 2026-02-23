@@ -43,6 +43,7 @@ masakari_services:
     dimensions: "{{ masakari_instancemonitor_dimensions }}"
   masakari-hostmonitor:
     container_name: masakari_hostmonitor
+    privileged: True
     group: masakari-hostmonitor
     enabled: "{{ enable_masakari_hostmonitor | bool }}"
     ipc_mode: host
